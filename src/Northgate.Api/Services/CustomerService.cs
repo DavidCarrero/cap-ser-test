@@ -12,7 +12,7 @@ public sealed class CustomerService
         _customers = customers;
     }
 
-    public async Task<CustomerDto?> GetAsync(int customerId, CancellationToken cancellationToken)
+    public async Task<CustomerDto?> GetAsync(long customerId, CancellationToken cancellationToken)
     {
         if (customerId <= 0)
         {

@@ -15,10 +15,10 @@ public sealed class CustomersController : ControllerBase
         _customers = customers;
     }
 
-    [HttpGet("{customerId:int}")]
+    [HttpGet("{customerId:long}")]
     [ProducesResponseType(typeof(CustomerDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<CustomerDto>> GetById(int customerId, CancellationToken cancellationToken)
+    public async Task<ActionResult<CustomerDto>> GetById(long customerId, CancellationToken cancellationToken)
     {
         var customer = await _customers.GetAsync(customerId, cancellationToken);
 

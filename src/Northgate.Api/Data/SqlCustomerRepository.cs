@@ -14,7 +14,7 @@ public sealed class SqlCustomerRepository : ICustomerRepository
             ?? throw new InvalidOperationException("Connection string 'Northgate' is not configured.");
     }
 
-    public async Task<CustomerDto?> GetByIdAsync(int customerId, CancellationToken cancellationToken)
+    public async Task<CustomerDto?> GetByIdAsync(long customerId, CancellationToken cancellationToken)
     {
         await using var connection = new SqlConnection(_connectionString);
         await using var command = new SqlCommand("usp_Customer_GetById", connection)
@@ -22,7 +22,7 @@ public sealed class SqlCustomerRepository : ICustomerRepository
             CommandType = CommandType.StoredProcedure
         };
 
-        command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = customerId;
+        command.Parameters.Add("@CustomerId", SqlDbType.BigInt).Value = customerId;
 
         await connection.OpenAsync(cancellationToken);
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
@@ -33,7 +33,7 @@ public sealed class SqlCustomerRepository : ICustomerRepository
         }
 
         return new CustomerDto(
-            reader.GetInt32(reader.GetOrdinal("CustomerId")),
+            reader.GetInt64(reader.GetOrdinal("CustomerId")),
             reader.GetString(reader.GetOrdinal("FullName")),
             reader.GetString(reader.GetOrdinal("DocumentNumber")),
             reader.GetString(reader.GetOrdinal("CountryCode")));
