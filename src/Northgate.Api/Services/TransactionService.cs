@@ -7,6 +7,9 @@ public sealed class TransactionService
 {
     public const int MaxPageSize = 200;
 
+    /// <summary>The currency every amount is reported in, as ISO 4217.</summary>
+    private const string ChfCurrencyCode = "CHF";
+
     private readonly ITransactionRepository _transactions;
     private readonly IRateClient _rates;
 
@@ -46,12 +49,26 @@ public sealed class TransactionService
 
         var rate = await _rates.GetChfRateAsync(cancellationToken);
 
-        // O(n)
         foreach (var transaction in results)
         {
-            transaction.AmountChf = transaction.Amount * rate;
+            transaction.AmountChf = transaction.Amount * ConversionFactor(transaction.Currency, rate);
         }
 
         return results;
     }
+
+    /// <summary>
+    /// An amount already denominated in CHF converts one-to-one. Applying the quoted
+    /// rate to it would restate the amount as though it were foreign currency, which
+    /// is how 12,000 CHF used to be reported as 9,541.80 CHF.
+    /// </summary>
+    /// <remarks>
+    /// Every other currency still shares the single quote the rates service returns.
+    /// Converting EUR and USD correctly needs a per-pair lookup, which the fx_rates
+    /// table already models but the rates service does not yet expose.
+    /// </remarks>
+    private static decimal ConversionFactor(string currency, decimal chfRate) =>
+        string.Equals(currency, ChfCurrencyCode, StringComparison.OrdinalIgnoreCase)
+            ? 1m
+            : chfRate;
 }
