@@ -116,4 +116,53 @@ public sealed class TransactionServiceTests
         await Assert.ThrowsAsync<HttpRequestException>(
             () => _service.SearchAsync("Ana", 0, 50, TestContext.Current.CancellationToken));
     }
+
+    [Fact]
+    public async Task SearchAsync_leaves_an_amount_already_in_chf_untouched()
+    {
+        // Regression: a CHF amount used to be multiplied by the CHF quote, so
+        // 12,000 CHF was reported as 9,541.80 CHF.
+        _transactions
+            .SearchAsync("Daniel", 0, 50, Arg.Any<CancellationToken>())
+            .Returns([new TransactionDto { Id = 5, CustomerName = "Daniel Meier", Amount = 12000.0000m, Currency = "CHF" }]);
+        _rates.GetChfRateAsync(Arg.Any<CancellationToken>()).Returns(0.79515m);
+
+        var results = await _service.SearchAsync("Daniel", 0, 50, TestContext.Current.CancellationToken);
+
+        results.ShouldHaveSingleItem().AmountChf.ShouldBe(12000.0000m);
+    }
+
+    [Fact]
+    public async Task SearchAsync_converts_foreign_amounts_but_not_chf_ones_in_the_same_page()
+    {
+        _transactions
+            .SearchAsync("Ana", 0, 50, Arg.Any<CancellationToken>())
+            .Returns([
+                new TransactionDto { Id = 1, Amount = 1000m, Currency = "USD" },
+                new TransactionDto { Id = 2, Amount = 1000m, Currency = "CHF" }
+            ]);
+        _rates.GetChfRateAsync(Arg.Any<CancellationToken>()).Returns(0.8m);
+
+        var results = await _service.SearchAsync("Ana", 0, 50, TestContext.Current.CancellationToken);
+
+        results.Select(t => t.AmountChf).ShouldBe([800m, 1000m]);
+    }
+
+    [Theory]
+    [InlineData("chf")]
+    [InlineData("Chf")]
+    [InlineData("CHF")]
+    public async Task SearchAsync_recognises_chf_whatever_the_casing(string currency)
+    {
+        // currency_code is char(3) and stored uppercase, but the comparison should not
+        // depend on the column's casing to stay correct.
+        _transactions
+            .SearchAsync("Daniel", 0, 50, Arg.Any<CancellationToken>())
+            .Returns([new TransactionDto { Id = 5, Amount = 500m, Currency = currency }]);
+        _rates.GetChfRateAsync(Arg.Any<CancellationToken>()).Returns(0.8m);
+
+        var results = await _service.SearchAsync("Daniel", 0, 50, TestContext.Current.CancellationToken);
+
+        results.ShouldHaveSingleItem().AmountChf.ShouldBe(500m);
+    }
 }
