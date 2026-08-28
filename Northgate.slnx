@@ -4,5 +4,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Northgate.Api.Tests/Northgate.Api.Tests.csproj" />
+    <Project Path="tests/Northgate.Api.IntegrationTests/Northgate.Api.IntegrationTests.csproj" />
   </Folder>
 </Solution>

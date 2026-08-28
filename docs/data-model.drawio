@@ -1,0 +1,236 @@
+<mxfile host="app.diagrams.net" agent="Claude Code" version="24.7.17">
+  <diagram id="northgate-data-model" name="Northgate data model">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Northgate / capital-services &#8212; normalized schema (PostgreSQL 17)" style="text;html=1;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="820" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Source of truth: db/001_schema.sql &#8212; mirrored 1:1 by NorthgateDbContext.OnModelCreating" style="text;html=1;fontSize=12;fontColor=#666666;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="48" width="820" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="countries" value="countries" style="shape=table;startSize=32;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;strokeColor=#6C8EBF;fillColor=#DAE8FC;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="countries">
+          <mxGeometry y="32" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_c1" value="PK&#160; code : char(2)" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="countries_r1">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="countries">
+          <mxGeometry y="58" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_c2" value="U&#160;&#160;&#160; name : text NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="countries_r2">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="countries">
+          <mxGeometry y="84" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="countries_c3" value="CK&#160; code = upper(code)" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontColor=#7F7F7F;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="countries_r3">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="currencies" value="currencies" style="shape=table;startSize=32;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;strokeColor=#6C8EBF;fillColor=#DAE8FC;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="300" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="currencies">
+          <mxGeometry y="32" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_c1" value="PK&#160; code : char(3)" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="currencies_r1">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="currencies">
+          <mxGeometry y="58" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_c2" value="name : text NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="currencies_r2">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="currencies">
+          <mxGeometry y="84" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_c3" value="minor_unit : smallint DEFAULT 2" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="currencies_r3">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="currencies">
+          <mxGeometry y="110" width="300" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="currencies_c4" value="CK&#160; minor_unit BETWEEN 0 AND 4" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontColor=#7F7F7F;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="currencies_r4">
+          <mxGeometry width="300" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="customers" value="customers" style="shape=table;startSize=32;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;strokeColor=#82B366;fillColor=#D5E8D4;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="340" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="customers">
+          <mxGeometry y="32" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_c1" value="PK&#160; id : bigint GENERATED ALWAYS AS IDENTITY" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="customers_r1">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="customers">
+          <mxGeometry y="58" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_c2" value="full_name : text NOT NULL&#160;&#160; &#8226; GIN trigram index" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="customers_r2">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="customers">
+          <mxGeometry y="84" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_c3" value="document_number : text NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="customers_r3">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="customers">
+          <mxGeometry y="110" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_c4" value="FK&#160; country_code : char(2) NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="customers_r4">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="customers">
+          <mxGeometry y="136" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="customers_c5" value="created_at : timestamptz DEFAULT now()" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="customers_r5">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="customers_uq" value="UNIQUE INDEX customers_document_unique_per_country (country_code, document_number)&#10;a document number is only unique within its issuing country" style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#666666;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="520" y="288" width="340" height="34" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fx_rates" value="fx_rates" style="shape=table;startSize=32;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;strokeColor=#D6B656;fillColor=#FFF2CC;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="520" y="440" width="340" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="fx_rates">
+          <mxGeometry y="32" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_c1" value="PK&#160; id : bigint GENERATED ALWAYS AS IDENTITY" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="fx_rates_r1">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="fx_rates">
+          <mxGeometry y="58" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_c2" value="FK&#160; base_code : char(3) NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="fx_rates_r2">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="fx_rates">
+          <mxGeometry y="84" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_c3" value="FK&#160; quote_code : char(3) NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="fx_rates_r3">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="fx_rates">
+          <mxGeometry y="110" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_c4" value="rate : numeric(18,8) NOT NULL&#160;&#160; CK rate &gt; 0" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="fx_rates_r4">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="fx_rates">
+          <mxGeometry y="136" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fx_rates_c5" value="as_of : timestamptz NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="fx_rates_r5">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fx_rates_uq" value="UNIQUE INDEX fx_rates_unique_quote (base_code, quote_code, as_of)&#160; &#8226;&#160; CK base_code &#8800; quote_code&#10;That unique index also serves the newest-rate-for-this-pair lookup by backward scan.&#10;index (quote_code)" style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#666666;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="520" y="608" width="340" height="48" as="geometry" />
+        </mxCell>
+
+        <mxCell id="transactions" value="transactions" style="shape=table;startSize=32;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;strokeColor=#B85450;fillColor=#F8CECC;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="260" width="340" height="188" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="32" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c1" value="PK&#160; id : bigint GENERATED ALWAYS AS IDENTITY" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r1">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="58" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c2" value="FK&#160; customer_id : bigint NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r2">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="84" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c3" value="amount : numeric(19,4) NOT NULL&#160;&#160; CK &#8800; 0" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r3">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="110" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c4" value="FK&#160; currency_code : char(3) NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r4">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="136" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c5" value="created_at : timestamptz DEFAULT now()" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r5">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_r6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" vertex="1" parent="transactions">
+          <mxGeometry y="162" width="340" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="transactions_c6" value="FK&#160; fx_rate_id : bigint NULL" style="shape=partialRectangle;connectable=0;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;spacingLeft=8;overflow=hidden;strokeColor=none;html=1;" vertex="1" parent="transactions_r6">
+          <mxGeometry width="340" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="transactions_note" value="fx_rate_id is the rate applied when the transaction settled &#8212; a historical fact,&#10;not derivable from the current rate. Storing the rate id is normalized;&#10;storing amount &#215; rate would not be.&#10;indexes: (customer_id, created_at DESC), (created_at DESC), (currency_code), (fx_rate_id)" style="text;html=1;align=left;verticalAlign=top;fontSize=10;fontColor=#666666;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="454" width="340" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_cust_country" value="issued in" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4D648D;" edge="1" parent="1" source="customers_r4" target="countries_r1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_txn_cust" value="belongs to" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4D648D;" edge="1" parent="1" source="transactions_r2" target="customers_r1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_txn_currency" value="denominated in" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4D648D;" edge="1" parent="1" source="transactions_r4" target="currencies_r1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="380" />
+              <mxPoint x="980" y="700" />
+              <mxPoint x="-20" y="700" />
+              <mxPoint x="-20" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="rel_txn_fx" value="settled at (optional)" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERzeroToOne;endFill=0;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#B85450;" edge="1" parent="1" source="transactions_r6" target="fx_rates_r1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_fx_base" value="base" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4D648D;" edge="1" parent="1" source="fx_rates_r2" target="currencies_r1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel_fx_quote" value="quote" style="edgeStyle=entityRelationEdgeStyle;html=1;rounded=0;fontSize=11;startArrow=ERmany;startFill=0;endArrow=ERone;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4D648D;" edge="1" parent="1" source="fx_rates_r3" target="currencies_r1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="537" />
+              <mxPoint x="-20" y="537" />
+              <mxPoint x="-20" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="legend" value="Legend" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;fontStyle=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="540" width="340" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text" value="PK &#8212; primary key&#10;FK &#8212; foreign key (italic)&#10;U &#8212; unique index&#10;CK &#8212; check constraint&#10;&#10;Crow foot on the many side, single bar on the one side.&#10;Dashed edge = nullable / optional relationship.&#10;&#10;Every FK is ON DELETE NO ACTION: a referenced row cannot&#10;be deleted while a child references it." style="text;html=1;align=left;verticalAlign=top;fontSize=11;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1072" y="566" width="320" height="136" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fk_note" value="The schema is declared in two places that must agree:&#10;db/001_schema.sql (the source of truth &#8212; there are no EF migrations) and the&#10;EF Core model: columns, keys and indexes as data annotations on the entity&#10;classes, relationships as fluent config in NorthgateDbContext.OnModelCreating&#10;(HasOne / WithMany + HasConstraintName + OnDelete(DeleteBehavior.NoAction)).&#10;A catalog diff of both against a fresh DB reports 55 identical objects." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="40" y="660" width="460" height="100" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

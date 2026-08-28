@@ -4,5 +4,5 @@ namespace Northgate.Api.Data;
 
 public interface ICustomerRepository
 {
-    Task<CustomerDto?> GetByIdAsync(int customerId, CancellationToken cancellationToken);
+    Task<CustomerDto?> GetByIdAsync(long customerId, CancellationToken cancellationToken);
 }
