@@ -33,11 +33,33 @@ The endpoint shows the conventions used in this codebase:
   expected cases or from `ProblemDetailsExceptionHandler` for everything else.
 - Every async path takes a `CancellationToken`.
 
-The test in `tests/Northgate.Api.Tests` covers the service against a stub repository, so it runs without a
-database.
+## Tests
+
+Two projects, both xUnit v3 on Microsoft Testing Platform:
+
+```
+tests/Northgate.Api.Tests              unit; no I/O, runs in well under a second
+tests/Northgate.Api.IntegrationTests   adapters and the HTTP surface, against a real Postgres
+```
+
+```
+dotnet test                                                   # everything
+dotnet test tests/Northgate.Api.Tests                         # unit only
+dotnet test tests/Northgate.Api.IntegrationTests              # integration and E2E only
+```
+
+The integration project starts a `postgres:17-alpine` container with Testcontainers,
+provisions it from `db/001_schema.sql` and `db/002_seed_reference.sql`, and shares one
+container across the assembly. Each test seeds its own rows under a unique token, so the
+classes still run in parallel. Sample data (`db/003_seed_sample.sql`) is deliberately not
+loaded.
+
+Docker must be running. Without it the container-backed tests report as **skipped**
+rather than failing, so on CI assert that the skip count is zero -- a green run that
+executed nothing is not a green run. The tests that only exercise failure paths
+(validation, unreachable database) point at a dead port on purpose and need no container.
 
 ## Layout
-
 ```
 src/Northgate.Api
   Contracts        response records
@@ -45,5 +67,7 @@ src/Northgate.Api
   Services         business rules
   Data             repository interface and its SQL implementation
   Infrastructure   exception handling
-tests/Northgate.Api.Tests
+tests/Northgate.Api.Tests              unit
+tests/Northgate.Api.IntegrationTests   Testcontainers + WebApplicationFactory
+db                                     schema and seed scripts, the source of truth
 ```
